@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Pharmachrome - Clinical Pharmacy Calculators & Unit Converter</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<meta name="description" content="Free Clinical Pharmacy Calculators including Creatinine Clearance, BMI, Dose Calculation, IV Flow Rate, Pharmacokinetics, and more.">
+
+<meta name="keywords" content="pharmacy calculator, clinical calculator, pharmacokinetics calculator, creatinine clearance calculator, pharmacy calculations">
+
+<meta name="author" content="Pharmachrome">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta property="og:title" content="Pharmachrome - Clinical Pharmacy Calculators">
+<meta property="og:description" content="Free Clinical Pharmacy Calculators for students and professionals">
+<meta property="og:type" content="website">
+
+<link rel="icon" type="image/png" href="favicon.png">
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="logo">
+<img src="images/p-logo.jpg" alt="Pharmachrome Logo">
+<span>Pharmachrome</span>
+</div>
+
+<nav>
+<a href="#" onclick="showSection('home')">Home</a>
+<a href="#" onclick="showSection('calculator')">Calculators</a>
+<a href="#" onclick="showSection('units')">Unit Converter</a>
+</nav>
+
+</header>
+
+
+<!-- HOME SECTION -->
+
+<section id="home" class="section home-split">
+
+<div class="home-center">
+
+<div class="home-badge">
+Professional Pharmacy Tools
+</div>
+
+<h1>Pharmachrome</h1>
+
+<p>
+Accurate clinical pharmacy calculators and unit conversions 
+designed for students and professionals.
+</p>
+
+<div class="home-buttons">
+
+<a href="#" onclick="showSection('calculator')" class="home-card">
+<h3>Calculators</h3>
+<span>Pharmacokinetics • Dose • Clinical</span>
+</a>
+
+<a href="#" onclick="showSection('units')" class="home-card">
+<h3>Unit Converter</h3>
+<span>Pharmacy • Medical • Scientific</span>
+</a>
+
+</div>
+
+<div class="home-trust">
+Fast • Accurate • Free • Academic Formulas
+</div>
+
+</div>
+
+
+<!-- FEATURES -->
+
+<section class="home-features">
+
+<div class="feature">
+<h3>Clinical Calculators</h3>
+<p>Pharmacokinetics and dose calculations</p>
+</div>
+
+<div class="feature">
+<h3>Unit Conversions</h3>
+<p>Pharmacy and medical conversions</p>
+</div>
+
+<div class="feature">
+<h3>Accurate Formulas</h3>
+<p>Academic and clinical references</p>
+</div>
+
+</section>
+
+
+<!-- SAFETY -->
+
+<section class="safety">
+
+<div class="safety-text">
+
+<h2>Global Safety Protocols</h2>
+
+<p>
+Pharmachrome follows international pharmaceutical calculation
+standards based on pharmacopeial references and laboratory
+practice guidelines to ensure safe and accurate calculations.
+</p>
+
+</div>
+
+<div class="safety-image">
+<img src="images/sf-section.jpg" alt="Safety section image">
+</div>
+
+</section>
+
+</section>
+
+
+<!-- CALCULATOR SECTION -->
+
+<section id="calculator" class="section" style="display:none;">
+<section class="calculator-section">
+
+<div class="section-nav">
+
+<button onclick="showSection('home')" class="nav-btn">
+← Home
+</button>
+
+<button onclick="showSection('units')" class="nav-btn">
+Unit Converter →
+</button>
+
+</div>
+
+<h2>Pharmaceutical Calculator Index</h2>
+
+<input type="text" id="searchBar" onkeyup="searchCalculator()" placeholder="Search calculator...">
+
+<p class="calculator-intro">
+Clinical pharmacy calculators for pharmacokinetics, dose calculation, renal function, IV infusion, and pharmaceutical calculations.
+</p>
+
+
+<div class="accordion">
+
+<!-- FUNDAMENTAL CALCULATIONS -->
+
+<div class="accordion-item">
+
+<div class="accordion-header">
+Fundamental Calculations >
+</div>
+
+<div class="accordion-content">
+
+<div id="fundamentalContainer" class="card-container"></div>
+
+</div>
+</div>
+
+<div class="accordion-item">
+
+<div class="accordion-header">
+Clinical Calculations >
+</div>
+
+<div class="accordion-content">
+
+<div id="clinicalContainer" class="card-container"></div>
+
+</div>
+</div>
+
+<div class="accordion-item">
+
+<div class="accordion-header">
+Physical Pharmacy Calculations >
+</div>
+
+<div class="accordion-content">
+
+<div id="physicalContainer" class="card-container"></div>
+
+</div>
+</div>
+
+<div class="accordion-item">
+
+<div class="accordion-header">
+Compounding Calculations >
+</div>
+
+<div class="accordion-content">
+
+<div id="compoundingContainer" class="card-container"></div>
+
+</div>
+</div>
+
+<div class="accordion-item">
+
+<div class="accordion-header">
+Renal Function Calculations >
+</div>
+
+<div class="accordion-content">
+
+<div id="renalContainer" class="card-container"></div>
+
+</div>
+</div>
+
+<div class="accordion-item">
+
+<div class="accordion-header">
+Pharmacokinetics Calculations >
+</div>
+
+<div class="accordion-content">
+
+<div id="pkContainer" class="card-container"></div>
+
+</div>
+</div>
+
+<div class="accordion-item">
+
+<div class="accordion-header">
+IV & Infusion Calculations >
+</div>
+
+<div class="accordion-content">
+
+<div id="ivContainer" class="card-container"></div>
+
+</div>
+</div>
+
+<div class="accordion-item">
+
+<div class="accordion-header">
+Acid-Base Calculations >
+</div>
+
+<div class="accordion-content">
+
+<div id="acidbaseContainer" class="card-container"></div>
+
+</div>
+</div>
+
+<div class="accordion-item">
+
+<div class="accordion-header">
+Nutrition Calculations >
+</div>
+
+<div class="accordion-content">
+
+<div id="nutritionContainer" class="card-container"></div>
+
+</div>
+</div>
+
+<div class="accordion-item">
+
+<div class="accordion-header">
+Nuclear Pharmacy Calculations >
+</div>
+
+<div class="accordion-content">
+
+<div id="nuclearContainer" class="card-container"></div>
+
+</div>
+</div>
+
+<div class="accordion-item">
+
+<div class="accordion-header">
+Alcohol Strength Calculations >
+</div>
+
+<div class="accordion-content">
+
+<div id="alcoholContainer" class="card-container"></div>
+
+</div>
+</div>
+
+<div class="accordion-item">
+
+<div class="accordion-header">
+Temperature Calculations >
+</div>
+
+<div class="accordion-content">
+
+<div id="temperatureContainer" class="card-container"></div>
+
+</div>
+</div>
+
+</div>
+
+</section>
+</section>
+
+
+<!-- UNIT CONVERTER SECTION -->
+
+<section id="units" class="section" style="display:none;">
+
+<section class="unit-section">
+
+<div class="section-nav">
+
+<button onclick="showSection('calculator')" class="nav-btn">
+← Calculators
+</button>
+
+<button onclick="showSection('home')" class="nav-btn">
+Home →
+</button>
+
+</div>
+
+<h2>Pharmaceutical Unit Converter</h2>
+
+<p>Convert between common pharmaceutical and laboratory units.</p>
+
+<div class="unit-converter">
+
+<input type="number" id="unitValue" placeholder="Enter value">
+
+<select id="fromUnit">
+<option value="km">Kilometer</option>
+<option value="hm">Hectometer</option>
+<option value="dam">Dekameter</option>
+<option value="m">Meter</option>
+<option value="dm">Decimeter</option>
+<option value="cm">Centimeter</option>
+<option value="mm">Millimeter</option>
+<option value="um">Micrometer</option>
+<option value="nm">Nanometer</option>
+<option value="inch">Inch</option>
+<option value="mile">Mile</option>
+<option value="kL">Kiloliter</option>
+<option value="hL">Hectoliter</option>
+<option value="daL">Dekliter</option>
+<option value="L">Liter</option>
+<option value="dL">Deciliter</option>
+<option value="cL">Centiliter</option>
+<option value="mL">Milliliter</option>
+<option value="uL">Microliter</option>
+<option value="cm3">Cubic centimeter</option>
+<option value="m3">Cubic meter</option>
+<option value="dm3">Cubic decimeter</option>
+<option value="cin">Cubic inch</option>
+<option value="cft">Cubic foot</option>
+<option value="kg">Kilogram</option>
+<option value="hg">Hectogram</option>
+<option value="dag">Dekagram</option>
+<option value="g">Gram</option>
+<option value="dg">Decigram</option>
+<option value="cg">Centigram</option>
+<option value="mg">Milligram</option>
+<option value="ug">Microgram</option>
+<option value="ng">Nanogram</option>
+<option value="pg">Picogram</option>
+<option value="fg">Femtogram</option>
+<option value="minim">Minim</option>
+<option value="fdr">Fluidram</option>
+<option value="floz">Fluidounce</option>
+<option value="pt">Pint</option>
+<option value="qt">Quart</option>
+<option value="gal">Gallon</option>
+<option value="gr">Grain</option>
+<option value="s">Scruple</option>
+<option value="dr">Dram</option>
+<option value="oz">Ounce</option>
+<option value="lb_general">Pound(general system)</option>
+<option value="lb_apothecary">Pound(apothecary system)</option>
+<option value="tsp">Teaspoonful</option>
+<option value="tbsp">Tablespoonful</option>
+<option value="dssp">Dessertspoonful</option>
+<option value="cfsp">Coffeespoon</option>
+<option value="wgl">Wine glass</option>
+<option value="tcp">Teacup</option>
+<option value="gl">Glass (tumbler, 250ml)</option>
+<option value="cp_metric">cup (metric)</option>
+<option value="gtt">Drop</option>
+<option value="F">Fahrenheit</option>
+<option value="C">Celsius</option>
+<option value="K">Kelvin</option>
+<option value="Ci">Curie</option>
+<option value="mCi">millicurie</option>
+<option value="uCi">microcurie</option>
+<option value="nCi">nanocurie</option>
+<option value="Bq">Becquerel</option>
+<option value="kBq">Kilobecquerel</option>
+<option value="MBq">Megabecquerel</option>
+<option value="GBq">Gigabecquerel</option>
+
+</select>
+
+<span>to</span>
+
+<select id="toUnit">
+<option value="km">Kilometer</option>
+<option value="hm">Hectometer</option>
+<option value="dam">Dekameter</option>
+<option value="m">Meter</option>
+<option value="dm">Decimeter</option>
+<option value="cm">Centimeter</option>
+<option value="mm">Millimeter</option>
+<option value="um">Micrometer</option>
+<option value="nm">Nanometer</option>
+<option value="inch">Inch</option>
+<option value="mile">Mile</option>
+<option value="kL">Kiloliter</option>
+<option value="hL">Hectoliter</option>
+<option value="daL">Dekliter</option>
+<option value="L">Liter</option>
+<option value="dL">Deciliter</option>
+<option value="cL">Centiliter</option>
+<option value="mL">Milliliter</option>
+<option value="uL">Microliter</option>
+<option value="cm3">Cubic centimeter</option>
+<option value="m3">Cubic meter</option>
+<option value="dm3">Cubic decimeter</option>
+<option value="cin">Cubic inch</option>
+<option value="cft">Cubic foot</option>
+<option value="kg">Kilogram</option>
+<option value="hg">Hectogram</option>
+<option value="dag">Dekagram</option>
+<option value="g">Gram</option>
+<option value="dg">Decigram</option>
+<option value="cg">Centigram</option>
+<option value="mg">Milligram</option>
+<option value="ug">Microgram</option>
+<option value="ng">Nanogram</option>
+<option value="pg">Picogram</option>
+<option value="fg">Femtogram</option>
+<option value="minim">Minim</option>
+<option value="fdr">Fluidram</option>
+<option value="floz">Fluidounce</option>
+<option value="pt">Pint</option>
+<option value="qt">Quart</option>
+<option value="gal">Gallon</option>
+<option value="gr">Grain</option>
+<option value="s">Scruple</option>
+<option value="dr">Dram</option>
+<option value="oz">Ounce</option>
+<option value="lb_general">Pound(general system)</option>
+<option value="lb_apothecary">Pound(apothecary system)</option>
+<option value="tsp">Teaspoonful</option>
+<option value="tbsp">Tablespoonful</option>
+<option value="dssp">Dessertspoonful</option>
+<option value="cfsp">Coffeespoon</option>
+<option value="wgl">Wine glass</option>
+<option value="tcp">Teacup</option>
+<option value="gl">Glass (tumbler, 250ml)</option>
+<option value="cp_metric">cup (metric)</option>
+<option value="gtt">Drop</option>
+<option value="F">Fahrenheit</option>
+<option value="C">Celsius</option>
+<option value="K">Kelvin</option>
+<option value="Ci">Curie</option>
+<option value="mCi">millicurie</option>
+<option value="uCi">microcurie</option>
+<option value="nCi">nanocurie</option>
+<option value="Bq">Becquerel</option>
+<option value="kBq">Kilobecquerel</option>
+<option value="MBq">Megabecquerel</option>
+<option value="GBq">Gigabecquerel</option>
+
+</select>
+
+<button onclick="convertUnits()">Convert</button>
+
+<p id="conversionResult"></p>
+
+</div>
+
+<h3>Unit Conversion Reference</h3>
+
+<!-- LENGTH -->
+<h3>Length</h3>
+<table>
+<tr><th>Unit</th><th>Equivalent</th></tr>
+<tr><td>1 km</td><td>1000 m</td></tr>
+<tr><td>1 hm</td><td>100 m</td></tr>
+<tr><td>1 dkm</td><td>10 m</td></tr>
+<tr><td>1 m</td><td>1 m</td></tr>
+<tr><td>1 dm</td><td>0.1 m</td></tr>
+<tr><td>1 cm</td><td>0.01 m</td></tr>
+<tr><td>1 mm</td><td>0.001 m</td></tr>
+<tr><td>1 um</td><td>1×10⁻⁶ m</td></tr>
+<tr><td>1 nm</td><td>1×10⁻⁹ m</td></tr>
+</table>
+
+
+<!-- VOLUME -->
+<h3>Volume (SI)</h3>
+<table>
+<tr><th>Unit</th><th>Equivalent</th></tr>
+<tr><td>1 kL</td><td>1000 L</td></tr>
+<tr><td>1 hL</td><td>100 L</td></tr>
+<tr><td>1 dkL</td><td>10 L</td></tr>
+<tr><td>1 L</td><td>1 L</td></tr>
+<tr><td>1 dL</td><td>0.1 L</td></tr>
+<tr><td>1 cL</td><td>0.01 L</td></tr>
+<tr><td>1 mL</td><td>0.001 L</td></tr>
+<tr><td>1 uL</td><td>1×10⁻⁶ L</td></tr>
+<tr><td>1 cm3</td><td>0.001 L</td></tr>
+<tr><td>1 dm3</td><td>1 L</td></tr>
+<tr><td>1 m3</td><td>1000 L</td></tr>
+<tr><td>1 in3</td><td>0.016387 L</td></tr>
+<tr><td>1 ft3</td><td>28.316 L</td></tr>
+
+</table>
+
+<h3>Volume (Household)</h3>
+<table>
+<tr><th>Unit</th><th>Equivalent</th></tr>
+<tr><td>1 tsp</td><td>5 mL</td></tr>
+<tr><td>1 tbsp</td><td>15 mL</td></tr>
+<tr><td>1 dspn</td><td>10 mL</td></tr>
+<tr><td>1 cspn</td><td>2.5 mL</td></tr>
+<tr><td>1 gl</td><td>250 mL</td></tr>
+<tr><td>1 cup (metric)</td><td>250 mL</td></tr>
+<tr><td>1 tcup</td><td>150 mL</td></tr>
+<tr><td>1 wgl</td><td>60 mL</td></tr>
+<tr><td>1 gtt</td><td>0.05 mL</td></tr>
+</table>
+
+<h3>Apothecary Fluid System</h3>
+<table>
+<tr><th>Conversion</th><th>Equivalent</th></tr>
+<tr><td>60 minims</td><td>1 fluidram</td></tr>
+<tr><td>8 fluidrams</td><td>1 fluidounce</td></tr>
+<tr><td>16 fluidounces</td><td>1 pint</td></tr>
+<tr><td>2 pints</td><td>1 quart</td></tr>
+<tr><td>4 quarts</td><td>1 gallon</td></tr>
+</table>
+
+<table>
+<tr><th>Unit</th><th>Equivalent</th></tr>
+<tr><td>1 minim</td><td>0.0616 mL</td></tr>
+<tr><td>1 fluidram</td><td>3.696 mL</td></tr>
+<tr><td>1 fluidounce</td><td>29.57 mL</td></tr>
+<tr><td>1 pint</td><td>473 mL</td></tr>
+<tr><td>1 quart</td><td>946 mL</td></tr>
+<tr><td>1 gallon</td><td>3785 mL</td></tr>
+</table>
+
+
+<!-- MASS -->
+<h3>Mass (SI)</h3>
+<table>
+<tr><th>Unit</th><th>Equivalent</th></tr>
+<tr><td>1 kg</td><td>1000 g</td></tr>
+<tr><td>1 hg</td><td>100 g</td></tr>
+<tr><td>1 dkg</td><td>10 g</td></tr>
+<tr><td>1 g</td><td>1 g</td></tr>
+<tr><td>1 dg</td><td>0.1 g</td></tr>
+<tr><td>1 cg</td><td>0.01 g</td></tr>
+<tr><td>1 mg</td><td>0.001 g</td></tr>
+<tr><td>1 ug</td><td>1×10⁻⁶ g</td></tr>
+<tr><td>1 ng</td><td>1×10⁻⁹ g</td></tr>
+<tr><td>1 pg</td><td>1×10⁻¹² g</td></tr>
+<tr><td>1 fg</td><td>1×10⁻¹⁵ g</td></tr>
+</table>
+
+<h3>Apothecary Weight System</h3>
+<table>
+<tr><th>Conversion</th><th>Equivalent</th></tr>
+<tr><td>20 grains</td><td>1 scruple</td></tr>
+<tr><td>3 scruples</td><td>1 dram</td></tr>
+<tr><td>8 drams</td><td>1 ounce</td></tr>
+<tr><td>12 ounces</td><td>1 pound</td></tr>
+</table>
+
+<table>
+<tr><th>Unit</th><th>Equivalent</th></tr>
+<tr><td>1 grain</td><td>0.0648 g</td></tr>
+<tr><td>1 scruple</td><td>1.296 g</td></tr>
+<tr><td>1 dram</td><td>3.888 g</td></tr>
+<tr><td>1 ounce</td><td>31.1035 g</td></tr>
+<tr><td>1 pound</td><td>373.242 g</td></tr>
+</table>
+
+
+<!-- RADIOACTIVITY -->
+<h3>Radioactivity</h3>
+<table>
+<tr><th>Unit</th><th>Equivalent</th></tr>
+<tr><td>1 Bq</td><td>1 disintegration/sec</td></tr>
+<tr><td>1 kBq</td><td>10³ Bq</td></tr>
+<tr><td>1 MBq</td><td>10⁶ Bq</td></tr>
+<tr><td>1 GBq</td><td>10⁹ Bq</td></tr>
+<tr><td>1 Ci</td><td>3.7 × 10¹⁰ Bq</td></tr>
+<tr><td>1 mCi</td><td>3.7 × 10⁷ Bq</td></tr>
+<tr><td>1 uCi</td><td>3.7 × 10⁴ Bq</td></tr>
+</table>
+
+
+<!-- TEMPERATURE -->
+<h3>Temperature</h3>
+<table>
+<tr><th>Conversion</th><th>Formula</th></tr>
+<tr><td>C → F</td><td>(C × 9/5) + 32</td></tr>
+<tr><td>F → C</td><td>(F − 32) × 5/9</td></tr>
+<tr><td>C → K</td><td>C + 273.15</td></tr>
+<tr><td>K → C</td><td>K − 273.15</td></tr>
+</table>
+
+</section>
+
+</section>
+
+<div id="calculatorModal" class="modal">
+
+<div class="modal-content">
+
+<h3 id="calcTitle"></h3>
+
+<div class="formula">
+<div id="formulaText"></div>
+</div>
+
+<div id="calcInputs"></div>
+
+<div class="actions">
+<button onclick="calculate()">Calculate</button>
+<button onclick="clearCalc()">Clear</button>
+<button onclick="closeCalculator()">Close</button>
+</div>
+
+<p id="calcResult">--</p>
+
+</div>
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div class="footer-section">
+
+<h3>About Pharmachrome</h3>
+
+<p>
+A platform providing pharmaceutical calculation tools for
+students, pharmacists, and researchers.
+</p>
+
+</div>
+
+<div class="footer-section">
+
+<h3>Calculator Categories</h3>
+
+<ul>
+<li>Dosage Calculations</li>
+<li>Dilution Calculations</li>
+<li>Infusion Rate</li>
+<li>Solution Preparation</li>
+<li>Unit Conversion</li>
+</ul>
+
+</div>
+
+<div class="footer-section">
+
+<h3>References</h3>
+
+<ul>
+<li>USP Standards</li>
+<li>Indian Pharmacopoeia</li>
+<li>Ansel Pharmaceutical Calculations</li>
+<li>Remington Pharmaceutics</li>
+</ul>
+
+</div>
+
+<div class="footer-section">
+
+<h3>Legal</h3>
+
+<ul>
+<li>Disclaimer</li>
+<li>Privacy Policy</li>
+<li>Terms of Use</li>
+</ul>
+
+</div>
+
+</footer>
+
+</body>
+
+<script src="script.js"></script>
+
+</html>
