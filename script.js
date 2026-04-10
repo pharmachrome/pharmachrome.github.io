@@ -217,6 +217,100 @@ document.getElementById("conversionResult").innerText =
 }
 
 
+// ================== MOLECULAR WEIGHT CALCULATION ==================
+
+function calculateMolecularWeight(){
+
+let formula = document.getElementById("formula").value.trim().toLowerCase();
+
+// ================== ATOMIC WEIGHTS ==================
+
+const atomicWeights = {
+
+h:1.008, he:4.0026, li:6.94, be:9.0122, b:10.81,
+c:12.011, n:14.007, o:15.999, f:18.998, ne:20.180,
+na:22.990, mg:24.305, al:26.982, si:28.085, p:30.974,
+s:32.06, cl:35.45, ar:39.948, k:39.098, ca:40.078,
+fe:55.845, cu:63.546, zn:65.38, ag:107.87, i:126.90,
+H:1.008, He:4.0026, Li:6.94, Be:9.0122, B:10.81,
+C:12.011, N:14.007, O:15.999, F:18.998, Ne:20.180,
+Na:22.990, Mg:24.305, Al:26.982, Si:28.085, P:30.974,
+S:32.06, Cl:35.45, Ar:39.948, K:39.098, Ca:40.078,
+Fe:55.845, Cu:63.546, Zn:65.38, Ag:107.87, I:126.90
+
+};
+
+let total = 0;
+let i = 0;
+
+// ================== PARSER ==================
+
+while(i < formula.length){
+
+let element = formula[i];
+
+// Check 2-letter element
+if(i + 1 < formula.length){
+
+let twoLetter = formula[i] + formula[i+1];
+
+if(atomicWeights[twoLetter]){
+element = twoLetter;
+i++;
+}
+
+}
+
+// Get number after element
+
+let num = "";
+let j = i + 1;
+
+while(j < formula.length && !isNaN(formula[j])){
+num += formula[j];
+j++;
+}
+
+let count = parseInt(num) || 1;
+
+// ================== CALCULATION ==================
+
+if(atomicWeights[element]){
+total += atomicWeights[element] * count;
+}
+else{
+document.getElementById("mwResult").innerHTML =
+"Unknown element: " + element;
+return;
+}
+
+i = j;
+
+}
+
+
+// ================== RESULT ==================
+
+let exact = total.toFixed(3);
+let approx = Math.round(total);
+
+document.getElementById("mwResult").innerHTML =
+
+`
+<div class="mw-result-main">
+${exact} g/mol
+</div>
+
+<div class="mw-result-approx">
+≈ ${approx} g/mol
+</div>
+`;
+
+}
+
+
+
+
 // ================== CALCULATOR SYSTEM ==================
 
 let currentCalc = "";
@@ -582,6 +676,34 @@ title: "Bioavailability",
 formula: "$$ F = \\frac{Amount\\ absorbed}{Dose} $$",
 category: "pharmacokinetics",
 fields: ["Amount absorbed","Dose","F"]
+},
+
+normality: {
+title: "Normality",
+formula: "$$ N = \\frac{Gram\\ equivalent\\ of\\ solute}{Volume\\ of\\ solution(L)} $$",
+category: "fundamental",
+fields: ["Normality", "Gram equivalent", "Volume of solution(L)"]
+},
+
+molarity: {
+title: "Molarity",
+formula: "$$ M = \\frac{Moles\\ of\\ solute}{Volume\\ of\\ solution(L)} $$",
+category: "fundamental",
+fields: ["Molarity", "Moles of solute", "Volume of solution(L)"]
+},
+
+molality: {
+title: "Molality",
+formula: "$$ m = \\frac{Moles\\ of\\ solute}{Kg\\ of\\ solvent} $$",
+category: "fundamental",
+fields: ["Molality", "Moles of solute", "Kg of solvent"]
+},
+
+formality: {
+title: "Formality",
+formula: "$$ F = \\frac{Formula\\ weight}{Volume\\ of\\ solution(L)} $$",
+category: "fundamental",
+fields: ["Formality", "Formula weight", "Volume of solution(L)"]
 }
 
 };
@@ -1426,6 +1548,66 @@ else result = "Leave one field empty";
 }
 
 
+// NORMALITY
+if(currentCalc === "normality"){
+
+let normality = values["Normality"];
+let gram = values["Gram equivalent of solute"];
+let volume = values["Volume of solution(L)"];
+
+if(volume == null) result = gram/normality;
+else if(gram == null) result = normality*volume;
+else if(normality == null) result = gram/volume;
+else result = "Leave one field empty";
+
+}
+
+
+// MOLARITY
+if(currentCalc === "molarity"){
+
+let molarity = values["Molarity"];
+let moles = values["Moles of solute"];
+let volume = values["Volume of solution(L)"];
+
+if(volume == null) result = moles/molarity;
+else if(moles == null) result = molarity*volume;
+else if(molarity == null) result = moles/volume;
+else result = "Leave one field empty";
+
+}
+
+
+// MOLALITY
+if(currentCalc === "molality"){
+
+let molality = values["Molality"];
+let moles = values["Moles of solute"];
+let solvent = values["Kg of solvent"];
+
+if(solvent == null) result = moles/molality;
+else if(moles == null) result = molality*solvent;
+else if(molality == null) result = moles/solvent;
+else result = "Leave one field empty";
+
+}
+
+
+// FORMALITY
+if(currentCalc === "formality"){
+
+let formality = values["Formality"];
+let weight = values["Formula weight"];
+let volume = values["Volume of solution(L)"];
+
+if(volume == null) result = weight/formality;
+else if(weight == null) result = formality*volume;
+else if(formality == null) result = weight/volume;
+else result = "Leave one field empty";
+
+}
+
+
 if(typeof result === "number"){
 result = Math.round(result * 1000) / 1000;
 }
@@ -1498,23 +1680,37 @@ inputs[index - 1].focus();
 
 document.addEventListener("DOMContentLoaded", function(){
 
-document.querySelectorAll(".accordion-header").forEach(header => {
+  document.querySelectorAll(".accordion-header").forEach(header => {
 
-header.addEventListener("click", function(){
+    header.addEventListener("click", function(e){
 
-const item = this.parentElement;
+      // Prevent automatic scroll caused by focus
+      e.preventDefault();
+      this.blur();  // remove focus from header after click
 
-document.querySelectorAll(".accordion-item").forEach(i=>{
-if(i !== item){
-i.classList.remove("active");
-}
-});
+      const item = this.parentElement;
+      const content = this.nextElementSibling;
 
-item.classList.toggle("active");
+      // Close other accordions smoothly
+      document.querySelectorAll(".accordion-item").forEach(i=>{
+        if(i !== item){
+          i.classList.remove("active");
+          i.querySelector(".accordion-content").style.maxHeight = "0";
+        }
+      });
 
-});
+      // Toggle current accordion
+      if(item.classList.contains("active")){
+        item.classList.remove("active");
+        content.style.maxHeight = "0";
+      } else {
+        item.classList.add("active");
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
 
-});
+    });
+
+  });
 
 });
 
