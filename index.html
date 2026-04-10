@@ -40,6 +40,7 @@
 <a href="#" onclick="showSection('home')">Home</a>
 <a href="#" onclick="showSection('calculator')">Calculators</a>
 <a href="#" onclick="showSection('units')">Unit Converter</a>
+<a href="#" onclick="showSection('molecular')">Molecular Weight Calculator</a>
 </nav>
 
 </header>
@@ -74,6 +75,11 @@ designed for students and professionals.
 <span>Pharmacy • Medical • Scientific</span>
 </a>
 
+<a href="#" onclick="showSection('molecular')" class="home-card">
+<h3>Molecular weight calculator</h3>
+<span>Pharmacy • Medical • Scientific</span>
+</a>
+
 </div>
 
 <div class="home-trust">
@@ -85,21 +91,27 @@ Fast • Accurate • Free • Academic Formulas
 
 <!-- FEATURES -->
 
-<section class="home-features">
+<section class="features-text">
 
-<div class="feature">
-<h3>Clinical Calculators</h3>
+<div class="feature-item">
+<div>
+<h4>Clinical Calculators</h4>
 <p>Pharmacokinetics and dose calculations</p>
 </div>
-
-<div class="feature">
-<h3>Unit Conversions</h3>
-<p>Pharmacy and medical conversions</p>
 </div>
 
-<div class="feature">
-<h3>Accurate Formulas</h3>
+<div class="feature-item">
+<div>
+<h4>Unit Conversions</h4>
+<p>Pharmacy and medical conversions</p>
+</div>
+</div>
+
+<div class="feature-item">
+<div>
+<h4>Accurate Formulas</h4>
 <p>Academic and clinical references</p>
+</div>
 </div>
 
 </section>
@@ -334,8 +346,8 @@ Temperature Calculations >
 ← Calculators
 </button>
 
-<button onclick="showSection('home')" class="nav-btn">
-Home →
+<button onclick="showSection('molecular')" class="nav-btn">
+Molecular weight calculator →
 </button>
 
 </div>
@@ -492,13 +504,11 @@ Home →
 
 </select>
 
-<button onclick="convertUnits()">Convert</button>
+<button onclick="convertUnits()" class="calc-btn">Convert</button>
 
 <p id="conversionResult"></p>
 
 </div>
-
-<h3>Unit Conversion Reference</h3>
 
 <!-- LENGTH -->
 <h3>Length</h3>
@@ -659,7 +669,49 @@ Home →
 
 </div>
 
+<!-- MOLECULAR WEIGHT SECTION -->
 
+<section id="molecular" class="section molecular-section">
+
+<div class="section-nav">
+
+<button onclick="showSection('units')" class="nav-btn">
+← Unit Converter
+</button>
+
+<button onclick="showSection('home')" class="nav-btn">
+Home →
+</button>
+
+</div>
+
+<h2>Molecular Weight Calculator</h2>
+
+<p>Calculate molecular weight of chemical compounds instantly</p>
+
+<div class="molecular-container">
+
+<div class="molecular-box">
+
+<label>Chemical Formula</label>
+
+<input 
+type="text" 
+id="formula" 
+placeholder="Example: H2SO4, NaCl, C6H12O6"
+>
+
+<button onclick="calculateMolecularWeight()" class="calc-btn">
+Calculate Molecular Weight
+</button>
+
+<div id="mwResult" class="result-box"></div>
+
+</div>
+
+</div>
+
+</section>
 
 <!-- FOOTER -->
 
