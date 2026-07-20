@@ -1,0 +1,65 @@
+:root {
+  /* Apothecary ledger palette */
+  --color-paper: #FAF7F0;
+  --color-ink: #1B2A4A;
+  --color-brass: #B8935A;
+  --color-sage: #7A8B76;
+  --color-rule: #D8D2C4;
+  --color-clay: #B5533C;
+  --color-card: #FFFFFF;
+  --color-muted: #5C6659;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --radius-sm: 3px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 0 0 var(--space-2);
+  letter-spacing: -0.2px;
+}
+
+p { margin: 0 0 var(--space-3); color: var(--color-muted); }
+
+a { color: var(--color-ink); text-decoration: none; }
+a:hover { color: var(--color-brass); }
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+input, select {
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
