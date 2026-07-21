@@ -71,10 +71,11 @@ export const CALCULATORS = [
     ],
     targets: ['rate', 'weight', 'dose', 'concentration'],
     solve(v, target) {
-      if (target === 'rate') return (v.weight * v.dose * 60) / v.concentration;
-      if (target === 'weight') return (v.rate * v.concentration) / (v.dose * 60);
-      if (target === 'dose') return (v.rate * v.concentration) / (v.weight * 60);
-      if (target === 'concentration') return (v.weight * v.dose * 60) / v.rate;
+      const weightKg = v.weight / 1000; // base unit is grams
+      if (target === 'rate') return (weightKg * v.dose * 60) / v.concentration;
+      if (target === 'weight') return ((v.rate * v.concentration) / (v.dose * 60)) * 1000;
+      if (target === 'dose') return (v.rate * v.concentration) / (weightKg * 60);
+      if (target === 'concentration') return (weightKg * v.dose * 60) / v.rate;
       throw new Error('Unknown target: ' + target);
     },
     descriptionContent: {

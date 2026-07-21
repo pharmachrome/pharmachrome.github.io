@@ -147,6 +147,13 @@ export function renderCalculator(container, calc) {
         if (valencyInput && !valencyInput.value && COMMON_VALENCY[name.toLowerCase()] !== undefined) {
           valencyInput.value = COMMON_VALENCY[name.toLowerCase()];
         }
+        // Some calculators (Equivalent Weight, mg-to-mEq, mEq/mL-to-mg/mL)
+        // don't use the auxiliary valency slot above — they have 'valence'
+        // as a regular solvable field instead. Suggest it there too, the
+        // same way, without overwriting anything the user already typed.
+        if (smartFields.valence && smartFields.valence.isEmpty() && COMMON_VALENCY[name.toLowerCase()] !== undefined) {
+          smartFields.valence.setBaseValue(COMMON_VALENCY[name.toLowerCase()]);
+        }
       }
     });
   }
@@ -238,12 +245,16 @@ export function renderCalculator(container, calc) {
     }
 
     // Physical quantities (mass, volume, concentration, MW, valency) can't be
-    // negative — catch that before it produces a confusing result.
-    for (const key in values) {
-      if (values[key] < 0) {
-        const f = calc.fields.find(f => f.key === key);
-        showError(resultBox, `${f ? f.label : key} can't be negative — check your inputs.`);
-        return;
+    // negative — catch that before it produces a confusing result. Skipped
+    // for calculators that explicitly allow negative values (e.g. Fahrenheit,
+    // Celsius, Kelvin can all legitimately go below zero).
+    if (!calc.allowNegative) {
+      for (const key in values) {
+        if (values[key] < 0) {
+          const f = calc.fields.find(f => f.key === key);
+          showError(resultBox, `${f ? f.label : key} can't be negative — check your inputs.`);
+          return;
+        }
       }
     }
 
@@ -259,7 +270,7 @@ export function renderCalculator(container, calc) {
       showError(resultBox, "Couldn't calculate that — one of the values above (like a volume of 0) makes this division impossible. Check your inputs.");
       return;
     }
-    if (resultValue < 0) {
+    if (resultValue < 0 && !calc.allowNegative) {
       const targetFieldForCheck = calc.fields.find(f => f.key === target);
       showError(resultBox, `That would give a negative ${(targetFieldForCheck ? targetFieldForCheck.label : target).toLowerCase()}, which isn't physically possible — check your inputs.`);
       return;
@@ -269,7 +280,12 @@ export function renderCalculator(container, calc) {
     smartFields[target].setBaseValue(resultValue);
 
     const targetField = calc.fields.find(f => f.key === target);
-    let html = `<strong>${targetField.label}: ${formatPair(resultValue)}</strong>`;
+    // Show the value the way it's actually displayed in the field (already
+    // converted to whichever unit its dropdown is set to), with that unit's
+    // abbreviation appended — not the raw, unlabeled base-unit number.
+    const displayValue = smartFields[target].getRawValue();
+    const unitSuffix = smartFields[target].unitSelect ? ` ${smartFields[target].unitSelect.value}` : '';
+    let html = `<strong>${targetField.label}: ${formatPair(displayValue)}${unitSuffix}</strong>`;
 
     // Bonus: whenever a molecule is known and a "weight" field exists, surface
     // the required grams regardless of which field was actually solved for.

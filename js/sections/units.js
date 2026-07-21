@@ -18,10 +18,10 @@ export function render(container) {
         <label>Quantity type</label>
         <select id="unit-type"></select>
       </div>
-      <div class="field-control" style="margin-bottom:14px;">
-        <input id="unit-value" type="number" step="any" autocomplete="off" placeholder="Value" style="flex:1;padding:8px 10px;border:1px solid var(--color-rule);border-radius:3px;background:var(--color-paper);">
+      <div class="unit-convert-row">
+        <input id="unit-value" type="number" step="any" autocomplete="off" placeholder="Value">
         <select id="unit-from"></select>
-        <span style="align-self:center;">→</span>
+        <span class="unit-convert-arrow">→</span>
         <select id="unit-to"></select>
       </div>
       <div class="result-box" id="unit-result">Enter a value above.</div>

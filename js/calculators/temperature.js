@@ -16,6 +16,7 @@ export const CALCULATORS = [
     description: 'Converts between Fahrenheit and Celsius (Centigrade) temperature scales.',
     molecule: false,
     hasValency: false,
+    allowNegative: true,
     fields: [
       { key: 'fahrenheit', label: 'Fahrenheit (°F)', unitType: null },
       { key: 'centigrade', label: 'Centigrade (°C)', unitType: null }
@@ -56,6 +57,7 @@ export const CALCULATORS = [
     description: 'Converts between Kelvin (the absolute temperature scale) and Celsius.',
     molecule: false,
     hasValency: false,
+    allowNegative: true,
     fields: [
       { key: 'kelvin', label: 'Kelvin (K)', unitType: null },
       { key: 'centigrade', label: 'Centigrade (°C)', unitType: null }
@@ -96,6 +98,7 @@ export const CALCULATORS = [
     description: 'Converts directly between Kelvin and Fahrenheit, combining both the offset and scaling adjustments in one step.',
     molecule: false,
     hasValency: false,
+    allowNegative: true,
     fields: [
       { key: 'kelvin', label: 'Kelvin (K)', unitType: null },
       { key: 'fahrenheit', label: 'Fahrenheit (°F)', unitType: null }

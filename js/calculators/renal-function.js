@@ -111,10 +111,11 @@ export const CALCULATORS = [
     ],
     targets: ['crcl', 'age', 'weight', 'scr'],
     solve(v, target) {
-      if (target === 'crcl') return ((140 - v.age) * v.weight) / (72 * v.scr);
-      if (target === 'age') return 140 - (v.crcl * 72 * v.scr) / v.weight;
-      if (target === 'weight') return (v.crcl * 72 * v.scr) / (140 - v.age);
-      if (target === 'scr') return ((140 - v.age) * v.weight) / (72 * v.crcl);
+      const weightKg = v.weight / 1000; // base unit is grams
+      if (target === 'crcl') return ((140 - v.age) * weightKg) / (72 * v.scr);
+      if (target === 'age') return 140 - (v.crcl * 72 * v.scr) / weightKg;
+      if (target === 'weight') return ((v.crcl * 72 * v.scr) / (140 - v.age)) * 1000;
+      if (target === 'scr') return ((140 - v.age) * weightKg) / (72 * v.crcl);
       throw new Error('Unknown target: ' + target);
     },
     descriptionContent: {
@@ -157,10 +158,11 @@ export const CALCULATORS = [
     ],
     targets: ['crcl', 'age', 'weight', 'scr'],
     solve(v, target) {
-      if (target === 'crcl') return 0.85 * ((140 - v.age) * v.weight) / (72 * v.scr);
-      if (target === 'age') return 140 - (v.crcl * 72 * v.scr) / (0.85 * v.weight);
-      if (target === 'weight') return (v.crcl * 72 * v.scr) / (0.85 * (140 - v.age));
-      if (target === 'scr') return 0.85 * ((140 - v.age) * v.weight) / (72 * v.crcl);
+      const weightKg = v.weight / 1000; // base unit is grams
+      if (target === 'crcl') return 0.85 * ((140 - v.age) * weightKg) / (72 * v.scr);
+      if (target === 'age') return 140 - (v.crcl * 72 * v.scr) / (0.85 * weightKg);
+      if (target === 'weight') return ((v.crcl * 72 * v.scr) / (0.85 * (140 - v.age))) * 1000;
+      if (target === 'scr') return 0.85 * ((140 - v.age) * weightKg) / (72 * v.crcl);
       throw new Error('Unknown target: ' + target);
     },
     descriptionContent: {
@@ -203,10 +205,12 @@ export const CALCULATORS = [
     ],
     targets: ['crcl', 'weight', 'albumin', 'scr'],
     solve(v, target) {
-      if (target === 'crcl') return (v.weight * (19 * v.albumin + 32)) / (100 * v.scr);
-      if (target === 'weight') return (v.crcl * 100 * v.scr) / (19 * v.albumin + 32);
-      if (target === 'albumin') return ((v.crcl * 100 * v.scr) / v.weight - 32) / 19;
-      if (target === 'scr') return (v.weight * (19 * v.albumin + 32)) / (100 * v.crcl);
+      const weightKg = v.weight / 1000; // base unit is grams
+      const albuminGdL = v.albumin / 1000; // concentration base is mg/dL; formula needs g/dL
+      if (target === 'crcl') return (weightKg * (19 * albuminGdL + 32)) / (100 * v.scr);
+      if (target === 'weight') return ((v.crcl * 100 * v.scr) / (19 * albuminGdL + 32)) * 1000;
+      if (target === 'albumin') return (((v.crcl * 100 * v.scr) / weightKg - 32) / 19) * 1000;
+      if (target === 'scr') return (weightKg * (19 * albuminGdL + 32)) / (100 * v.crcl);
       throw new Error('Unknown target: ' + target);
     },
     descriptionContent: {
@@ -249,10 +253,12 @@ export const CALCULATORS = [
     ],
     targets: ['crcl', 'weight', 'albumin', 'scr'],
     solve(v, target) {
-      if (target === 'crcl') return (v.weight * (13 * v.albumin + 29)) / (100 * v.scr);
-      if (target === 'weight') return (v.crcl * 100 * v.scr) / (13 * v.albumin + 29);
-      if (target === 'albumin') return ((v.crcl * 100 * v.scr) / v.weight - 29) / 13;
-      if (target === 'scr') return (v.weight * (13 * v.albumin + 29)) / (100 * v.crcl);
+      const weightKg = v.weight / 1000; // base unit is grams
+      const albuminGdL = v.albumin / 1000; // concentration base is mg/dL; formula needs g/dL
+      if (target === 'crcl') return (weightKg * (13 * albuminGdL + 29)) / (100 * v.scr);
+      if (target === 'weight') return ((v.crcl * 100 * v.scr) / (13 * albuminGdL + 29)) * 1000;
+      if (target === 'albumin') return (((v.crcl * 100 * v.scr) / weightKg - 29) / 13) * 1000;
+      if (target === 'scr') return (weightKg * (13 * albuminGdL + 29)) / (100 * v.crcl);
       throw new Error('Unknown target: ' + target);
     },
     descriptionContent: {

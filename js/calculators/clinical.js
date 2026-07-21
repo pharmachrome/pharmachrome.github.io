@@ -22,9 +22,10 @@ export const CALCULATORS = [
     ],
     targets: ['patientDose', 'weight', 'dosePerKg'],
     solve(v, target) {
-      if (target === 'patientDose') return v.weight * v.dosePerKg;
-      if (target === 'weight') return v.patientDose / v.dosePerKg;
-      if (target === 'dosePerKg') return v.patientDose / v.weight;
+      const weightKg = v.weight / 1000; // base unit is grams
+      if (target === 'patientDose') return weightKg * v.dosePerKg;
+      if (target === 'weight') return (v.patientDose / v.dosePerKg) * 1000;
+      if (target === 'dosePerKg') return v.patientDose / weightKg;
       throw new Error('Unknown target: ' + target);
     },
     descriptionContent: {
@@ -110,9 +111,10 @@ export const CALCULATORS = [
     targets: ['bsa', 'height', 'weight'],
     solve(v, target) {
       const heightCm = v.height * 100; // base unit is m
-      if (target === 'bsa') return Math.sqrt((heightCm * v.weight) / 3600);
-      if (target === 'height') return (Math.pow(v.bsa, 2) * 3600 / v.weight) / 100;
-      if (target === 'weight') return Math.pow(v.bsa, 2) * 3600 / heightCm;
+      const weightKg = v.weight / 1000; // base unit is grams
+      if (target === 'bsa') return Math.sqrt((heightCm * weightKg) / 3600);
+      if (target === 'height') return (Math.pow(v.bsa, 2) * 3600 / weightKg) / 100;
+      if (target === 'weight') return (Math.pow(v.bsa, 2) * 3600 / heightCm) * 1000;
       throw new Error('Unknown target: ' + target);
     },
     descriptionContent: {
@@ -237,9 +239,9 @@ export const CALCULATORS = [
     ],
     targets: ['iron', 'weight', 'hb'],
     solve(v, target) {
-      const weightLb = v.weight / 0.453592; // base unit is kg
+      const weightLb = v.weight / 453.592; // base unit is grams; 453.592 g = 1 lb
       if (target === 'iron') return weightLb * 0.3 * (100 - (v.hb * 100 / 14.8));
-      if (target === 'weight') return (v.iron / (0.3 * (100 - (v.hb * 100 / 14.8)))) * 0.453592;
+      if (target === 'weight') return (v.iron / (0.3 * (100 - (v.hb * 100 / 14.8)))) * 453.592;
       if (target === 'hb') return ((100 - v.iron / (0.3 * weightLb)) * 14.8) / 100;
       throw new Error('Unknown target: ' + target);
     },
@@ -282,9 +284,10 @@ export const CALCULATORS = [
     ],
     targets: ['bmi', 'weight', 'height'],
     solve(v, target) {
-      if (target === 'bmi') return v.weight / Math.pow(v.height, 2);
-      if (target === 'weight') return v.bmi * Math.pow(v.height, 2);
-      if (target === 'height') return Math.sqrt(v.weight / v.bmi);
+      const weightKg = v.weight / 1000; // base unit is grams
+      if (target === 'bmi') return weightKg / Math.pow(v.height, 2);
+      if (target === 'weight') return (v.bmi * Math.pow(v.height, 2)) * 1000;
+      if (target === 'height') return Math.sqrt(weightKg / v.bmi);
       throw new Error('Unknown target: ' + target);
     },
     descriptionContent: {

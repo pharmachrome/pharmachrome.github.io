@@ -23,10 +23,11 @@ export const CALCULATORS = [
     targets: ['bee', 'weight', 'height', 'age'],
     solve(v, target) {
       const heightCm = v.height * 100; // base unit is m
-      if (target === 'bee') return 66.47 + 13.75 * v.weight + 5 * heightCm - 6.76 * v.age;
-      if (target === 'weight') return (v.bee - 66.47 - 5 * heightCm + 6.76 * v.age) / 13.75;
-      if (target === 'height') return ((v.bee - 66.47 - 13.75 * v.weight + 6.76 * v.age) / 5) / 100;
-      if (target === 'age') return (66.47 + 13.75 * v.weight + 5 * heightCm - v.bee) / 6.76;
+      const weightKg = v.weight / 1000; // base unit is grams
+      if (target === 'bee') return 66.47 + 13.75 * weightKg + 5 * heightCm - 6.76 * v.age;
+      if (target === 'weight') return ((v.bee - 66.47 - 5 * heightCm + 6.76 * v.age) / 13.75) * 1000;
+      if (target === 'height') return ((v.bee - 66.47 - 13.75 * weightKg + 6.76 * v.age) / 5) / 100;
+      if (target === 'age') return (66.47 + 13.75 * weightKg + 5 * heightCm - v.bee) / 6.76;
       throw new Error('Unknown target: ' + target);
     },
     descriptionContent: {
@@ -70,10 +71,11 @@ export const CALCULATORS = [
     targets: ['bee', 'weight', 'height', 'age'],
     solve(v, target) {
       const heightCm = v.height * 100;
-      if (target === 'bee') return 655.1 + 9.56 * v.weight + 1.86 * heightCm - 4.68 * v.age;
-      if (target === 'weight') return (v.bee - 655.1 - 1.86 * heightCm + 4.68 * v.age) / 9.56;
-      if (target === 'height') return ((v.bee - 655.1 - 9.56 * v.weight + 4.68 * v.age) / 1.86) / 100;
-      if (target === 'age') return (655.1 + 9.56 * v.weight + 1.86 * heightCm - v.bee) / 4.68;
+      const weightKg = v.weight / 1000; // base unit is grams
+      if (target === 'bee') return 655.1 + 9.56 * weightKg + 1.86 * heightCm - 4.68 * v.age;
+      if (target === 'weight') return ((v.bee - 655.1 - 1.86 * heightCm + 4.68 * v.age) / 9.56) * 1000;
+      if (target === 'height') return ((v.bee - 655.1 - 9.56 * weightKg + 4.68 * v.age) / 1.86) / 100;
+      if (target === 'age') return (655.1 + 9.56 * weightKg + 1.86 * heightCm - v.bee) / 4.68;
       throw new Error('Unknown target: ' + target);
     },
     descriptionContent: {
