@@ -172,6 +172,16 @@ export function renderCalculator(container, calc) {
     const sf = createSmartField(f);
     smartFields[f.key] = sf;
     primaryGroup.appendChild(sf.wrapper);
+    // Equivalent Weight, mg-to-mEq, and mEq/mL-to-mg/mL have valence as a
+    // regular solvable field (not the fixed auxiliary slot Normality uses,
+    // since here it can also be the one thing solved for) — give it the
+    // same explanatory hint so the experience feels consistent either way.
+    if (f.key === 'valence' && calc.molecule && !calc.hasValency) {
+      const hint = document.createElement('div');
+      hint.className = 'field-hint';
+      hint.textContent = 'Depends on the reaction — auto-filled as a common default when the molecule above is recognized, check before use.';
+      sf.wrapper.appendChild(hint);
+    }
   }
   leftCol.appendChild(primaryGroup);
 

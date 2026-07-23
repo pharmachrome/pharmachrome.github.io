@@ -10,12 +10,16 @@ async function loadCategory(categoryId) {
 }
 
 async function loadAllCalculators() {
-  const all = [];
-  for (const cat of CATEGORIES) {
-    const list = await loadCategory(cat.id);
-    all.push({ category: cat, calculators: list });
-  }
-  return all;
+  // Load every category's module in parallel rather than one-at-a-time —
+  // with 13 categories, sequentially awaiting each one turns into several
+  // seconds of pure waiting even though nothing here actually depends on
+  // another category finishing first.
+  return Promise.all(
+    CATEGORIES.map(async (cat) => ({
+      category: cat,
+      calculators: await loadCategory(cat.id)
+    }))
+  );
 }
 
 const PIN_SVG = `<svg width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M16 9V3H8v6l-2 2v2h5v7h2v-7h5v-2l-2-2z"/></svg>`;

@@ -217,7 +217,7 @@ export const CALCULATORS = [
     molecule: true,
     hasValency: false,
     fields: [
-      { key: 'valence', label: 'Valence', unitType: null },
+      { key: 'valence', label: 'Valency / n-factor', unitType: null },
       { key: 'equivalentWeight', label: 'Equivalent weight (g/eq)', unitType: null }
     ],
     targets: ['equivalentWeight', 'valence'],
@@ -260,7 +260,7 @@ export const CALCULATORS = [
     hasValency: false,
     fields: [
       { key: 'mg', label: 'Weight', unitType: 'mass', defaultUnit: 'mg' },
-      { key: 'valence', label: 'Valence', unitType: null },
+      { key: 'valence', label: 'Valency / n-factor', unitType: null },
       { key: 'meq', label: 'mEq', unitType: null }
     ],
     targets: ['meq', 'mg', 'valence'],
@@ -306,7 +306,7 @@ export const CALCULATORS = [
     hasValency: false,
     fields: [
       { key: 'meqPerMl', label: 'mEq/mL', unitType: null },
-      { key: 'valence', label: 'Valence', unitType: null },
+      { key: 'valence', label: 'Valency / n-factor', unitType: null },
       { key: 'mgPerMl', label: 'mg/mL', unitType: null }
     ],
     targets: ['mgPerMl', 'meqPerMl', 'valence'],
